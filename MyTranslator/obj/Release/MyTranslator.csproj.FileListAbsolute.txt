@@ -1,0 +1,15 @@
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\bin\Release\MyTranslator.exe.config
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\bin\Release\MyTranslator.exe
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\bin\Release\MyTranslator.pdb
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.MyTranslator.resources
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.Properties.Resources.resources
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.csproj.GenerateResource.Cache
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.exe
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.pdb
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.csprojAssemblyReference.cache
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.csproj.CoreCompileInputs.cache
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\bin\Release\MyTranslator.exe.manifest
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\bin\Release\MyTranslator.application
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.TrustInfo.xml
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.exe.manifest
+D:\Projects\MyTranslator\MyTranslator\MyTranslator\obj\Release\MyTranslator.application
