@@ -59,6 +59,7 @@
             this.webBrowser2.ScrollBarsEnabled = false;
             this.webBrowser2.Size = new System.Drawing.Size(1101, 640);
             this.webBrowser2.TabIndex = 1;
+            this.webBrowser2.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser2_DocumentCompleted);
             // 
             // button1
             // 

@@ -9,12 +9,14 @@ using System.Runtime.InteropServices;
 
 namespace MyTranslator
 {
-    class BasicHook
+    public class BasicHook
     {
 
-        private const int WH_KEYBOARD_LL = 13;
+        public const int WH_KEYBOARD_LL = 13;
 
-        private const int WM_KEYDOWN = 0x0100;
+        public const int WM_KEYDOWN = 0x0100;
+        public const int WM_KEYUP = 0x0101;
+
 
         private static IntPtr _hookID = IntPtr.Zero;
 
@@ -24,7 +26,7 @@ namespace MyTranslator
 
 
 
-        private static IntPtr SetHook(LowLevelKeyboardProc proc)
+        public static IntPtr SetHook(LowLevelKeyboardProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
@@ -34,7 +36,7 @@ namespace MyTranslator
 
         }
 
-        private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
         private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
@@ -52,10 +54,10 @@ namespace MyTranslator
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+        public static extern bool UnhookWindowsHookEx(IntPtr hhk);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);

@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Google_Translate_Icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="MyTranslator" version="3.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="MyTranslator" version="4.0.0.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="MyTranslator.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyTranslator.exe" size="767488">
-      <assemblyIdentity name="MyTranslator" version="3.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MyTranslator.exe" size="769024">
+      <assemblyIdentity name="MyTranslator" version="4.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OZvfgS9Y0pSFHI2Tt5jWh8eqhrr09fxLdi5V5+3Ppxk=</dsig:DigestValue>
+        <dsig:DigestValue>KnDg6ZbqC4P/1+rv4zo6kC56bbHmp++HPDx/W9xzyS8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
