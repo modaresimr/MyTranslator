@@ -24,8 +24,12 @@ namespace MyTranslator
             InitializeComponent();
 
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        protected override void WndProc(ref Message m)
+        {
+            clipboardViewer.WndProc(ref m);
+            base.WndProc(ref m);
+        }
+            private void Form1_Load(object sender, EventArgs e)
         {
             if (Control.IsKeyLocked(Keys.CapsLock))
                 toggleCapsLock();
@@ -62,7 +66,15 @@ namespace MyTranslator
             t.Start();
             _hookCallback = new BasicHook.LowLevelKeyboardProc(HookCallback);
             hook = BasicHook.SetHook(_hookCallback);
+
+            clipboardViewer.Register(this.Handle);
+            clipboardViewer.CopyRecevier += s => {
+                if (System.DateTime.Now - lastCopyRequestTime < TimeSpan.FromSeconds(2))
+                    log(s);
+            };
+
         }
+        ClipboardViewer clipboardViewer = new ClipboardViewer();
 
         private void timeElapsed(object sender, ElapsedEventArgs e)
         {
@@ -105,6 +117,7 @@ namespace MyTranslator
         DateTime lastkey = DateTime.MinValue;
         private static BasicHook.LowLevelKeyboardProc _hookCallback;
         private IntPtr hook;
+        private DateTime lastCopyRequestTime = System.DateTime.Now;
 
         private string getcurrentapp()
         {
@@ -138,7 +151,9 @@ namespace MyTranslator
                     {
                         try
                         {
-                            copyFromApp();
+                            //copyFromApp();
+                            copyFromApp2();
+                            
                         }
                         catch (Exception e) { Console.Error.WriteLine(e); }
                     });
@@ -148,7 +163,16 @@ namespace MyTranslator
             }
             return IntPtr.Zero;//BasicHook.CallNextHookEx(hook, nCode, wParam, lParam);
         }
-
+        private void copyFromApp2()
+        {
+            lastCopyRequestTime = System.DateTime.Now;
+            var f = User32.GetForegroundWindow();
+            //User32.SetForegroundWindow(f);
+            SendKeys.SendWait("^c");
+            SendKeys.Flush();
+            
+        
+        }
         private void copyFromApp()
         {
             //if (DateTime.Now.Subtract(lastkey).TotalMilliseconds < 400)
@@ -217,22 +241,8 @@ namespace MyTranslator
                         return;
                     }
                     //Clipboard.SetText(" ");
-                    var f = User32.GetForegroundWindow();
-                    //User32.SetForegroundWindow(f);
-                    SendKeys.SendWait("^c");
-                    SendKeys.Flush();
-                    SendKeys.SendWait("^c");
-                    SendKeys.Flush();
-                    //toggleCapsLock();
-                    //User32.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
-
-                    if (Clipboard.ContainsText())
-                    {
-                        //                    Thread.Sleep(1000);
-                        string text = Clipboard.GetText(TextDataFormat.UnicodeText);
-                        log(text);
-
-                    }
+                    //ClipboardViewer.sendCopy(this.Handle, s => log(s));
+                    copyFromApp2();
 
                     return;
                 }
@@ -281,29 +291,7 @@ namespace MyTranslator
             }
         }
 
-        private static class User32
-        {
-            [DllImport("user32.dll")]
-            public static extern IntPtr GetForegroundWindow();
-            [DllImport("user32.dll")]
-            public static extern bool AttachThreadInput(IntPtr idAttach, IntPtr idAttachTo,
-                bool fAttach);
-
-            [DllImport("user32.dll")]
-            public static extern IntPtr GetWindowThreadProcessId(IntPtr hWnd, out IntPtr ProcessId);
-
-            [DllImport("User32.dll")]
-            internal static extern IntPtr SetForegroundWindow(IntPtr hWnd);
-
-            [DllImport("user32.dll")]
-            internal static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-            internal static readonly IntPtr InvalidHandleValue = IntPtr.Zero;
-            internal const int SW_MAXIMIZE = 3;
-            [DllImport("user32.dll")]
-            public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags,
-                UIntPtr dwExtraInfo);
-        }
+        
         public void Activate2()
         {
             Process currentProcess = Process.GetCurrentProcess();
@@ -380,7 +368,7 @@ namespace MyTranslator
                 //webBrowser1.DocumentText= webBrowser1.ObjectForScriptingDocumentText.Replace("</body>", script + "</body>");
                 HtmlElement head = webBrowser1.Document.GetElementsByTagName("body")[0];
                 HtmlElement styleEl = webBrowser1.Document.CreateElement("style");
-                styleEl.InnerText = ".frame{height: 100vh !important}.page{max-width: 95%;}.gt-lc.gt-lc-mobile.show-as-one-card {position: absolute;top: 0px;z-index: 999;}";
+                styleEl.InnerText = ".frame{height: 100vh !important}.page{max-width: 95%;}.gt-lc.gt-lc-mobile.show-as-one-card {position: absolute;top: 50vh;z-index: 999;}";
                 head.AppendChild(styleEl);
                 //HtmlElement scriptE2 = webBrowser1.Document.CreateElement("script");
                 //scriptE2.SetAttribute("src", "https://www.scribens.com/scribens-integration.js")

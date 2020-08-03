@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicHook.cs" />
+    <Compile Include="ClipboardViewer.cs" />
     <Compile Include="MyTranslator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +86,7 @@
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User32.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="TextSelectionReader.cs" />
     <EmbeddedResource Include="MyTranslator.resx">
